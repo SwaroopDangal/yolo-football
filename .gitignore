@@ -11,3 +11,6 @@ runs/
 # Python cache
 __pycache__/
 *.pyc
+
+#stub pkl files
+stubs/
