@@ -190,3 +190,30 @@ class Tracker:
         cv2.drawContours(frame, [triangle_points],0,(0,0,0), 2)
 
         return frame
+
+    
+    def draw_annotations(self,video_frames,tracks):
+        output_video_frames=[]
+        for frame_num,frame in enumerate(video_frames):
+            frame = frame.copy()
+
+            player_dict = tracks['players'][frame_num]
+            referee_dict = tracks['referees'][frame_num]
+            ball_dict = tracks['ball'][frame_num]
+
+            #draw players
+            for track_id,player in player_dict.items():
+                bbox = player['bbox']
+                frame = self.draw_ellipse(frame,bbox,(0,255,0),track_id)
+
+            for _,referee in referee_dict.items():
+                bbox = referee['bbox']
+                frame = self.draw_ellipse(frame,bbox,(0,255,255))
+
+            for track_id,ball in ball_dict.items():
+                bbox = ball['bbox']
+                frame = self.draw_traingle(frame,bbox,(0,255,0))
+
+            output_video_frames.append(frame)
+        
+        return output_video_frames
