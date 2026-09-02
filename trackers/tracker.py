@@ -85,7 +85,7 @@ class Tracker:
 
         tracks={
             "players":[],
-            "refrees":[],
+            "referees":[],
             "ball":[]
         }
 
@@ -117,8 +117,8 @@ class Tracker:
                 if cls_id == cls_names_inv['player']:
                     tracks['players'][frame_num][track_id]={"bbox":bbox}
 
-                if cls_id == cls_names_inv['refree']:
-                    tracks['refree'][frame_num][track_id]={"bbox":bbox}
+                if cls_id == cls_names_inv['referees']:
+                    tracks['referees'][frame_num][track_id]={"bbox":bbox}
 
             for frame_detection in detection_supervision:
                 bbox = frame_detection[0].tolist()
@@ -129,7 +129,7 @@ class Tracker:
 
         return tracks
 
-    def draw_ellipse(self,frame,bbox,color,track_id):
+    def draw_ellipse(self,frame,bbox,color,track_id=None):
         y2 = int(bbox[3])
         x_center, _ = get_center_of_bbox(bbox)
         width = get_bbox_width(bbox)
@@ -173,7 +173,32 @@ class Tracker:
                 2
             )
 
-            return frame
+        return frame
+
+
+        output_video_frames=[]
+        for frame_num,frame in enumerate(video_frames):
+            frame = frame.copy()
+            player_dict = tracks['players'][frame_num]
+            referees_dict = tracks['referees'][frame_num]
+            ball_dict = tracks['ball'][frame_num]
+
+
+            #draw players
+            for track_id,player in player_dict.items():
+                frame = self.draw_ellipse(frame,player['bbox'],(0,0,255),track_id)
+
+            #draw referees 
+            for _,referees in referees_dict.items():
+                            frame = self.draw_ellipse(frame,referees['bbox'],(0,255,255))
+            
+
+
+            output_video_frames.append(frame)
+
+        return output_video_frames
+
+        
 
 
 
