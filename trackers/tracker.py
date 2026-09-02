@@ -4,6 +4,7 @@ import pickle
 import os
 import cv2
 import sys 
+import numpy as np
 from utils import get_center_of_bbox, get_bbox_width, get_foot_position
 sys.path.append('../')
 
@@ -176,30 +177,16 @@ class Tracker:
         return frame
 
 
-        output_video_frames=[]
-        for frame_num,frame in enumerate(video_frames):
-            frame = frame.copy()
-            player_dict = tracks['players'][frame_num]
-            referees_dict = tracks['referees'][frame_num]
-            ball_dict = tracks['ball'][frame_num]
+    def draw_traingle(self,frame,bbox,color):
+        y= int(bbox[1])
+        x,_ = get_center_of_bbox(bbox)
 
+        triangle_points = np.array([
+            [x,y],
+            [x-10,y-20],
+            [x+10,y-20],
+        ])
+        cv2.drawContours(frame, [triangle_points],0,color, cv2.FILLED)
+        cv2.drawContours(frame, [triangle_points],0,(0,0,0), 2)
 
-            #draw players
-            for track_id,player in player_dict.items():
-                frame = self.draw_ellipse(frame,player['bbox'],(0,0,255),track_id)
-
-            #draw referees 
-            for _,referees in referees_dict.items():
-                            frame = self.draw_ellipse(frame,referees['bbox'],(0,255,255))
-            
-
-
-            output_video_frames.append(frame)
-
-        return output_video_frames
-
-        
-
-
-
-   
+        return frame
