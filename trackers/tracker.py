@@ -219,6 +219,9 @@ class Tracker:
                 bbox = player['bbox']
                 frame = self.draw_ellipse(frame,bbox,color,track_id)
 
+                if player.get('has_ball',False):
+                    frame = self.draw_traingle(frame,bbox,(0,0,255))
+
             for _,referee in referee_dict.items():
                 bbox = referee['bbox']
                 frame = self.draw_ellipse(frame,bbox,(0,255,255))
