@@ -249,7 +249,11 @@ class Tracker:
                 bbox = ball['bbox']
                 frame = self.draw_traingle(frame,bbox,(0,255,0))
 
+            
+            #draw team ball control
+            frame=self.draw_team_ball_control(frame,team_ball_control)
 
+            
             output_video_frames.append(frame)
         
         return output_video_frames

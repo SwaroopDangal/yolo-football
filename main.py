@@ -59,7 +59,7 @@ def main():
     ##draw o/p
     # draw object tracks
 
-    output_video_frames=tracker.draw_annotations(video_frames,tracks)
+    output_video_frames=tracker.draw_annotations(video_frames,tracks,team_ball_control)
 
     print(f"Drawing completed.")
     print(f"Saving output video...")
