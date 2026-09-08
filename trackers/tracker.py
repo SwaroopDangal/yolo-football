@@ -251,7 +251,7 @@ class Tracker:
 
             
             #draw team ball control
-            frame=self.draw_team_ball_control(frame,team_ball_control)
+            frame=self.draw_team_ball_control(frame,frame_num,team_ball_control)
 
             
             output_video_frames.append(frame)
