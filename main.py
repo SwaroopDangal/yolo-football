@@ -69,6 +69,10 @@ def main():
 
     output_video_frames=tracker.draw_annotations(video_frames,tracks,team_ball_control)
 
+      ## Draw Camera movement
+    output_video_frames = camera_movement_estimator.draw_camera_movement(output_video_frames,camera_movement_per_frame)
+
+
     print(f"Drawing completed.")
     print(f"Saving output video...")
 
