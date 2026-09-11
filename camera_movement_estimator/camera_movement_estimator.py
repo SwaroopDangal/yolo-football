@@ -4,7 +4,7 @@ import numpy as np
 import os
 import sys 
 sys.path.append('../')
-from utils import measure_distance,measure_xy_distance
+from utils import get_foot_position, measure_distance,measure_xy_distance
 class CameraMovementEstimator:
     def __init__(self,frame):
         self.minimum_distance = 5
@@ -28,14 +28,16 @@ class CameraMovementEstimator:
             mask = mask_features
         )
 
-        def add_adjust_positions_to_tracks(self,tracks, camera_movement_per_frame):
-            for object, object_tracks in tracks.items():
-                for frame_num, track in enumerate(object_tracks):
-                    for track_id, track_info in track.items():
-                        position = track_info['position']
-                        camera_movement = camera_movement_per_frame[frame_num]
-                        position_adjusted = (position[0]-camera_movement[0],position[1]-camera_movement[1])
-                        tracks[object][frame_num][track_id]['position_adjusted'] = position_adjusted
+    def add_adjust_positions_to_tracks(self,tracks, camera_movement_per_frame):
+        for object, object_tracks in tracks.items():
+            for frame_num, track in enumerate(object_tracks):
+                for track_id, track_info in track.items():
+                    position = track_info.get('position')
+                    if position is None:
+                        position = get_foot_position(track_info['bbox'])
+                    camera_movement = camera_movement_per_frame[frame_num]
+                    position_adjusted = (position[0]-camera_movement[0],position[1]-camera_movement[1])
+                    tracks[object][frame_num][track_id]['position_adjusted'] = position_adjusted
                     
     def get_camera_movement(self,frames,read_from_stub=False, stub_path=None):
         # Read the stub 
