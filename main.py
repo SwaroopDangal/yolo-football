@@ -4,6 +4,7 @@ from team_assigner import TeamAssigner
 from player_ball_assigner import PlayerBallAssigner
 from camera_movement_estimator import CameraMovementEstimator
 from view_transformer import ViewTransformer
+from speed_and_distance_estimator import SpeedAndDistance_Estimator
 import numpy as np
 import cv2
 
@@ -36,6 +37,11 @@ def main():
     print("Interpolating ball positions...")
     tracks["ball"] = tracker.interpolate_ball_positions(tracks["ball"])
     print(f"Interpolation completed.")
+
+    
+    # Speed and distance estimator
+    speed_and_distance_estimator = SpeedAndDistance_Estimator()
+    speed_and_distance_estimator.add_speed_and_distance_to_tracks(tracks)
 
     # Assign Teams
     print("Assigning teams to players...")
