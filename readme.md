@@ -1,5 +1,10 @@
 # Yolo Football ⚽
 
+## Demo
+
+        <video src="https://github.com/SwaroopDangal/yolo-football/raw/main/output/output_video.avi" controls width="600"></video>
+>
+
 A computer vision project for analyzing football (soccer) match footage using **YOLO** object detection. The pipeline detects and tracks players, referees, and the ball, then layers on higher-level match analytics like team assignment, ball possession, player speed/distance, and camera movement compensation.
 
 ## Features
@@ -71,3 +76,11 @@ pip install ultralytics opencv-python numpy scikit-learn pandas
 
 The `training/` folder contains resources for training a YOLO model on a custom football dataset (e.g., via Roboflow or a similarly labeled dataset) so detection is tuned specifically for players, referees, and the ball.
 
+## Notes
+
+- This README was written based on the repository's folder/file layout, since the repo currently doesn't include a detailed one. Update the **Usage** section with the exact input/output paths and model file names used in `main.py` once confirmed.
+- Consider adding a `requirements.txt`, sample input/output video or GIF, and license file to make the repo easier for others to run.
+
+## License
+
+No license specified yet — consider adding one (e.g., MIT) if you intend for others to use or contribute to this project.
