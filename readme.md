@@ -2,7 +2,7 @@
 
 ## Demo
 
-        <video src="https://github.com/SwaroopDangal/yolo-football/raw/main/output/output_video.avi" controls width="600"></video>
+        <video src="https://github.com/SwaroopDangal/yolo-football/raw/main/output/output_video.mp4" controls width="600"></video>
 >
 
 A computer vision project for analyzing football (soccer) match footage using **YOLO** object detection. The pipeline detects and tracks players, referees, and the ball, then layers on higher-level match analytics like team assignment, ball possession, player speed/distance, and camera movement compensation.
