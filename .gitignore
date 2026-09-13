@@ -1,9 +1,6 @@
 # YOLO output
 runs/
 
-# Large video files
-*.mp4
-*.avi
 
 # YOLO model weights
 *.pt
